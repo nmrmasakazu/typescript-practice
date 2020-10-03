@@ -1,6 +1,15 @@
 // JSファイルを推論
 import { sampleText, sampleFunction } from "./sample"
 
+/////////////// 第5章 ////////////////////
+interface User7 {
+    name: string
+}
+interface User7 {
+    age: number
+}
+
+/////////////// 第4章 ////////////////////
 function getFormattedValue(value: number | null) {
     if (value === null) return "-- pt"
     return `${value.toFixed(1)} pt`
@@ -29,6 +38,67 @@ const maybeUser = {
     gender: "male"
 }
 registerUser(maybeUser)
+
+const defaultTheme = {
+    backgroundColor: "orange" as "orange",
+    borderColor: "red"
+}
+defaultTheme.backgroundColor = "orange"
+
+// インデックスシグネチャによる動的プロパティ追加の許容
+type User2 = {
+    name: string,
+    [k: string]: number | string
+}
+const user2: User2 = {
+    name: "nmrmasakazu",
+    age: 26
+}
+console.log(user2)
+
+type Question = "exercise_habbits"
+type Answer = "mighty" | "lot"
+type User3 = {
+    name: string,
+    enquete: {
+        [k in Question]?: Answer
+    }
+}
+const user3: User3 = {
+    name: "Taro",
+    enquete: {
+        exercise_habbits: "mighty"
+    }
+}
+const y = user3.enquete.exercise_habbits
+
+// 関数プロパティのみ
+interface Functions {
+    [k: string]: Function
+}
+
+function reset(value: number | string) {
+    const v0 = value
+    if (typeof value === "number") {
+        const v1 = value
+    }
+}
+
+type User4 = {
+    gender: string
+}
+type User5 = User4 & {
+    name: string
+}
+type User6 = User4 & {
+    graduate: string
+}
+
+function judgeUserType(user: User5 | User6) {
+    if ("name" in user) {
+        const u = user
+    }
+}
 
 /////////////// 第3章 ////////////////////
 const array1 = [true, false]
